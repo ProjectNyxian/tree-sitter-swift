@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "TreeSitterSwift",
-    platforms: [.macOS(.v10_13), .iOS(.v11)],
+    platforms: [.macOS(.v10_13), .iOS(.v12)],
     products: [
         .library(name: "TreeSitterSwift", targets: ["TreeSitterSwift"]),
     ],
@@ -11,9 +11,7 @@ let package = Package(
     targets: [
         .target(
             name: "TreeSitterSwift",
-            dependencies: [
-                
-            ],
+            dependencies: [],
             path: ".",
             exclude: [
                 "Cargo.toml",
