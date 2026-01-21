@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
@@ -9,41 +9,51 @@ let package = Package(
     ],
     dependencies: [],
     targets: [
-        .target(name: "TreeSitterSwift",
-                path: ".",
-                exclude: [
-                    "Cargo.toml",
-                    "Makefile",
-                    "binding.gyp",
-                    "bindings/c",
-                    "bindings/go",
-                    "bindings/node",
-                    "bindings/python",
-                    "bindings/rust",
-                    "prebuilds",
-                    "grammar.js",
-                    "package.json",
-                    "package-lock.json",
-                    "pyproject.toml",
-                    "setup.py",
-                    "test",
-                    "examples",
-                    ".editorconfig",
-                    ".github",
-                    ".gitignore",
-                    ".gitattributes",
-                    ".gitmodules",
-                ],
-                sources: [
-                    "src/parser.c",
-                    // NOTE: if your language has an external scanner, add it here.
-                    "src/scanner.c",
-                ],
-                resources: [
-                    .copy("queries")
-                ],
-                publicHeadersPath: "bindings/swift",
-                cSettings: [.headerSearchPath("src")])
+        .target(
+            name: "TreeSitterSwift",
+            dependencies: [
+                
+            ],
+            path: ".",
+            exclude: [
+                "Cargo.toml",
+                "Makefile",
+                "binding.gyp",
+                "bindings/c",
+                "bindings/go",
+                "bindings/node",
+                "bindings/python",
+                "bindings/rust",
+                "prebuilds",
+                "grammar.js",
+                "package.json",
+                "package-lock.json",
+                "pyproject.toml",
+                "setup.py",
+                "test",
+                "examples",
+                ".editorconfig",
+                ".github",
+                ".gitignore",
+                ".gitattributes",
+                ".gitmodules",
+            ],
+            sources: [
+                "src/parser.c",
+                "src/scanner.c",
+            ],
+            resources: [
+                .copy("queries")
+            ],
+            publicHeadersPath: "bindings/swift",
+            cSettings: [
+                .headerSearchPath("src"),
+                .headerSearchPath("."),
+            ],
+            linkerSettings: [
+                .linkedLibrary("tree-sitter"),
+            ]
+        )
     ],
-    cLanguageStandard: .c11
+    cLanguageStandard: .c11,
 )
